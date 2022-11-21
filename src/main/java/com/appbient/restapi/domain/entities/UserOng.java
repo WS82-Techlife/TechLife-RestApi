@@ -7,6 +7,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,6 +30,7 @@ public class UserOng {
     private Integer role;
     
     private String locale;
+    @Lob
     private String description;
     
     @OneToMany(mappedBy = "ongAuthor", fetch=FetchType.LAZY)

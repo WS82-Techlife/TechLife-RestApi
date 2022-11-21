@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -27,6 +28,7 @@ public class Application {
     @Column(name="creation_date")
     private LocalDateTime creationDate;
 	@ManyToOne
+	@JsonBackReference
 	@JoinColumn(name="id_project")
 	private Project project;
 	@ManyToOne

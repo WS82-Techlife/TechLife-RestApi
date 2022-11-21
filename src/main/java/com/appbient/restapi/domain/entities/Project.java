@@ -7,10 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -26,6 +27,7 @@ public class Project {
 	@Column(name="id_project")
 	private Integer id;
 	private String name;
+	@Lob
 	private String description;
     @JsonProperty("creation_date")
     @Column(name="creation_date")
@@ -34,16 +36,21 @@ public class Project {
 	@JoinColumn(name="id_userOng")
 	@JsonProperty("ong_id")
 	private UserOng userOng;
+	@Lob
 	private String location;
 	private double lat;
 	private double lng;
+	@Lob
 	private String mission;
+	@Lob
 	private String functions;
+	@Lob
 	@JsonProperty("photo_urls")
 	private String photoUrls;
+	@Lob
 	private String requirements;
 	@OneToMany(mappedBy = "project")
-    @JsonIgnore
+	@JsonManagedReference
 	private List<Application> applications;
 	
 	public Project(int id) {

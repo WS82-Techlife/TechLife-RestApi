@@ -13,4 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Integer>{
     
     @Query(value="select * from project p where p.name like %:keyword%",nativeQuery = true)
     List<Project> findProjectsByKeyword(String keyword);
+    
+    @Query(value="SELECT *, (3959 * acos (cos ( radians(?1) )* cos( radians( lat ) )* cos( radians( lng ) - radians(?2) )+ sin ( radians(?1) )* sin( radians( lat ) ))) AS distance FROM project HAVING distance < 2 ORDER BY distance LIMIT 0 , 20;",nativeQuery = true)
+    List<Project> findNearByProjects(double lat, double lng);
 }

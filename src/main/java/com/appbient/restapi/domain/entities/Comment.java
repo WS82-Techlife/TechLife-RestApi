@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,6 +28,7 @@ public class Comment {
     @Id
     @Column(name="id_comment")
     private Integer id;
+    @Lob
     private String content;
     @Column(name="creation_date")
     private LocalDateTime creationDate;

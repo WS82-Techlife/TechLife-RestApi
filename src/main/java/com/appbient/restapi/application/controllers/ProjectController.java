@@ -65,4 +65,9 @@ public class ProjectController {
 	public List<Project> getProjectByUser(@RequestParam("keyword")String keyword){
 		return this.projectQueryService.findByKeyword(keyword);
 	}
+	@CrossOrigin
+	@GetMapping(value="/nearby")
+	public List<Project> getNearbyProjects(@RequestParam("lat")double lat, @RequestParam("lng")double lng){
+		return this.projectQueryService.findNearbyProjects(lat,lng);
+	}
 }

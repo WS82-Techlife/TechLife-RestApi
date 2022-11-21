@@ -31,4 +31,7 @@ public class ProjectQueryService {
 	public List<Project> findByKeyword(String keyword){
 		return this.projectRepository.findProjectsByKeyword(keyword);
 	}
+	public List<Project> findNearbyProjects(double lat, double lng){
+		return this.projectRepository.findNearByProjects(lat,lng);
+	}
 }
