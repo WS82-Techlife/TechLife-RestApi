@@ -5,13 +5,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -49,8 +50,8 @@ public class Project {
 	private String photoUrls;
 	@Lob
 	private String requirements;
-	@OneToMany(mappedBy = "project")
-	@JsonManagedReference
+	@OneToMany(mappedBy = "project", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Application> applications;
 	
 	public Project(int id) {

@@ -25,7 +25,7 @@ public class ApplicationProjection {
 	private final ProjectRepository projectRepository;
 	private final UserVolunteerRepository userVolunteerRepository;
 	
-	public void createApplication(CreateApplicationCommand command) {
+	public Application createApplication(CreateApplicationCommand command) {
 		int flagForeignsAreValid=0;
 		if(command.getApplicant().getId()!=null) {
 			Optional<UserVolunteer> optionalApplicant= this.userVolunteerRepository.findById(command.getApplicant().getId());
@@ -52,7 +52,8 @@ public class ApplicationProjection {
 			command.getProject(),
 			command.getApplicant()
 		);
-		applicationRepository.save(application);
+		return applicationRepository.save(application);
+		
 	}
 
 	public void deleteApplication(DeleteApplicationCommand command) {

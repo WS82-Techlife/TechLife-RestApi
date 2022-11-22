@@ -7,10 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.appbient.restapi.application.controllers.dto.ApplicationCreationDTO;
-import com.appbient.restapi.domain.commands.EvaluateApplicationCommand;
 import com.appbient.restapi.domain.commands.CreateApplicationCommand;
 import com.appbient.restapi.domain.commands.DeleteApplicationCommand;
-import com.appbient.restapi.domain.commands.DeleteProjectCommand;
+import com.appbient.restapi.domain.commands.EvaluateApplicationCommand;
+import com.appbient.restapi.domain.entities.Application;
 import com.appbient.restapi.domain.entities.Project;
 import com.appbient.restapi.domain.entities.UserVolunteer;
 import com.appbient.restapi.domain.exceptions.ResourceNotFoundException;
@@ -37,14 +37,16 @@ public class ApplicationCommandService {
 				new Project(creationDTO.getProject_id()),
 				new UserVolunteer(creationDTO.getUser_volunteer_id())
 		);
-		
+		Application newApplication=null;
 		try {
-			this.applicationProjection.createApplication(command);
+			newApplication =this.applicationProjection.createApplication(command);
 		}catch(Exception e) {
 			throw e;
 		}
+		
+		String message="{\"message\":\"Aplicacino creada con exito\", \"id_application\":\""+newApplication.getId().toString()+"\"}";
 
-		return this.commandGateway.send(command).thenApply(it->ResponseEntity.ok("Aplicacino creada con exito"))
+		return this.commandGateway.send(command).thenApply(it->ResponseEntity.ok(message))
 				.exceptionally(e -> {
                     return ResponseEntity.badRequest().body(e.getMessage());
                 });

@@ -21,4 +21,5 @@ public class ApplicationQueryService {
 	public List<Application> findAllByUserVolunteer(Integer userVolunteerId){
 		return this.applicationRepository.findApplicationsByUserVolunteer(userVolunteerId);
 	}
+	
 }

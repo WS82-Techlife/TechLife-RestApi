@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.appbient.restapi.application.controllers.dto.ProjectCreationDTO;
+import com.appbient.restapi.application.controllers.dto.ProjectRetrivalDTO;
 import com.appbient.restapi.domain.entities.Project;
 import com.appbient.restapi.domain.services.ProjectCommandService;
 import com.appbient.restapi.domain.services.ProjectQueryService;
@@ -52,8 +53,8 @@ public class ProjectController {
 	}
 	@CrossOrigin
 	@GetMapping(value="/{id}")
-	public Project getProjectById(@PathVariable("id")int id){
-		return this.projectQueryService.findById(id);
+	public ProjectRetrivalDTO getProjectById(@PathVariable("id")int id ,@RequestParam(required=false)Integer volunteerId ){
+		return this.projectQueryService.findById(id,volunteerId);
 	}
 	@CrossOrigin
 	@GetMapping(value="/user/{id}")
@@ -67,7 +68,7 @@ public class ProjectController {
 	}
 	@CrossOrigin
 	@GetMapping(value="/nearby")
-	public List<Project> getNearbyProjects(@RequestParam("lat")double lat, @RequestParam("lng")double lng){
+	public List<ProjectRetrivalDTO> getNearbyProjects(@RequestParam("lat")double lat, @RequestParam("lng")double lng){
 		return this.projectQueryService.findNearbyProjects(lat,lng);
 	}
 }
